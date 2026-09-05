@@ -5,6 +5,15 @@
         <title>SpaceHey profile editor</title>
         <link rel="icon" href="./icon.png">
         <link rel="stylesheet" href="style.css">
+
+        <meta name="og:title" content="SpaceHey live profile editor">
+        <meta name="og:description" content="A live editor for SpaceHey profiles!">
+        <meta name="og:site_name" content="spacehey.skyla.moe">
+        <meta name="og:image" content="https://spacehey.skyla.moe/icon.png">
+        <meta name="og:locale" content="en_GB">
+        <meta name="og:type" content="website">
+        
+        <meta name="theme-color" content="#71368A">
     </head>
     <body>
         <div class="editor">
@@ -13,13 +22,19 @@
 
             <hr/>
 
+            <button type="button" onclick="configSave()">Save config &#40;json&#41;</button>
+            <button type="button" onclick="document.getElementById('configUpload').click()">Load config</button>
+
+            <input type="file" id="configUpload" accept=".json,application/json" onchange="configLoad(event)" hidden>
+            
+            <hr/>
+
             <button type="button" onclick="updateUsername()">Change username</button>
             <button type="button" onclick="updateUsername('SpaceHey')">Reset username</button>
+            <button type="button" onclick="document.getElementById('avatarUpdate').click()">Change avatar</button>
             <button type="button" onclick="resetAvatar()">Reset avatar</button>
 
-            <br/>
-
-            <input type="file" id="avatarUpdate" accept="image/*" onchange="updateAvatar(event)">
+            <input type="file" id="avatarUpdate" accept="image/*" onchange="updateAvatar(event)" hidden>
             
             <hr/>
 
@@ -123,7 +138,7 @@ Once edited once this box should be visible from your profile on Desktop.">?</a>
             <iframe id="previewFrame"></iframe>
         </div>
 
-        <button id="toggleEditor" onclick="toggleEditor();">Toggle editor</button>
+        <button id="toggleEditor" onclick="previewFrame.classList.toggle('fullscreen')">Toggle editor</button>
         <script src="script.js"></script>
     </body>
 </html>

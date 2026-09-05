@@ -28,6 +28,71 @@ let templateHtml = null;
 let updateTimer;
 
 
+function configLoad(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (file.type !== 'application/json') {
+        alert('Invalid type... please try again!');
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        let values;
+
+        try { values = JSON.parse(reader.result); }
+        catch (error) {
+            alert('Failed to load config file... please try a different file!\nReport this to the developer if you believe this is incorrect...');
+            console.log(error);
+            return;
+        }
+
+        document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => {
+            if (Object.prototype.hasOwnProperty.call(values, inputBox.id)) {
+                inputBox.value = values[inputBox.id];
+            }
+            else { inputBox.value = null; }
+        });
+
+        if (values.username) { localStorage.setItem('username', values.username); }
+        if (values.avatar) { localStorage.setItem('avatar', values.avatar); }
+
+        updatePreview();
+    };
+
+    reader.onerror = function() {
+        alert('Failed to load config file... please try a different file!\nReport this to the developer if you believe this is incorrect...');
+        console.log(reader.error);
+    }
+
+    reader.readAsText(file);
+    event.target.value = '';
+}
+
+
+function configSave() {
+    const values = {};
+    document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => { values[inputBox.id] = inputBox.value; });
+
+    values['username'] = localStorage.getItem('username');
+    values['avatar'] = localStorage.getItem('avatar');
+
+    const blob = new Blob([JSON.stringify(values, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const file = document.createElement('a');
+    file.href = url;
+    file.download = 'spacehey-profile-config.json';
+    
+    document.body.appendChild(file);
+    file.click();
+    document.body.removeChild(file);
+
+    URL.revokeObjectURL(url);
+}
+
+
 function rebuild(values) {
     let preview = templateHtml;
 
@@ -44,9 +109,6 @@ function rebuild(values) {
 
     return preview;
 }
-
-
-function toggleEditor() { previewFrame.classList.toggle('fullscreen'); }
 
 
 function updatePreview() {
@@ -108,6 +170,7 @@ function updateAvatar(event) {
     };
 
     reader.readAsDataURL(file);
+    event.target.value = '';
 }
 
 
