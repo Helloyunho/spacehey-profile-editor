@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SpaceHey profile editor</title>
+        <link rel="icon" href="./icon.png">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="editor">
+            <h1 style="margin: 0;">SpaceHey profile editor:</h1>
+            <h5 style="margin: 4px 0;">Made by <a href="https://spacehey.com/skyla" target="_blank">Skyla</a>!</h5>
+
+            <hr/>
+
+            <button type="button" onclick="updateUsername()">Change username</button>
+            <button type="button" onclick="updateUsername('SpaceHey')">Reset username</button>
+            <button type="button" onclick="resetAvatar()">Reset avatar</button>
+
+            <br/>
+
+            <input type="file" id="avatarUpdate" accept="image/*" onchange="updateAvatar(event)">
+            
+            <hr/>
+
+            <h3 style="margin-bottom: 4px;"><u>Status:</u></h3>
+            <p style="margin-top: 8px;"><small>
+                <strong>NOTE:</strong>
+                HTML is
+                <strong>NOT</strong>
+                allowed for these entries...
+            </small></p>
+
+            <div class="field flex">
+                <p>Status:</p>
+                <input class="inputBox" type="text" id="statusStatus" placeholder="Editing my SpaceHey profile!">
+            </div>
+
+            <div class="field flex">
+                <p>Mood:</p>
+                <input class="inputBox" type="text" id="statusMood" placeholder="Happy as always! ^-^">
+            </div>
+
+            <div class="field flex">
+                <p>You:</p>
+                <input class="inputBox" type="text" id="statusYou" placeholder="I am a SpaceHey user!">
+            </div>
+
+            <div class="field">
+                <label>
+                    <input type="checkbox" id="isFriendToggle" onclick="updatePreview()" checked>
+                    Show is &quot;User is your Friend.&quot; box
+                </label>
+            </div>
+
+            <hr/>
+
+            <h3><u>Blurbs:</u></h3>
+            <div class="field">
+                <h5>About me:</h5>
+                <textarea class="inputBox" type="text" id="aboutMe">This is a really cool about me!</textarea>
+            </div>
+
+            <div class="field">
+                <h5>Who I'd like to meet:</h5>
+                <textarea class="inputBox" type="text" id="whoIdLikeToMeet">You so I could give you a big hug! ^-^</textarea>
+            </div>
+
+            <h3><u>Interests:</u></h3>
+
+            <div class="field">
+                <h5>General:</h5>
+                <textarea class="inputBox" type="text" id="interestsGeneral"></textarea>
+            </div>
+
+            <div class="field">
+                <h5>Music:</h5>
+                <textarea class="inputBox" type="text" id="interestsMusic"></textarea>
+            </div>
+
+            <div class="field">
+                <h5>Movies:</h5>
+                <textarea class="inputBox" type="text" id="interestsMovies"></textarea>
+            </div>
+
+            <div class="field">
+                <h5>Television:</h5>
+                <textarea class="inputBox" type="text" id="interestsTelevision"></textarea>
+            </div>
+
+            <div class="field">
+                <h5>Books:</h5>
+                <textarea class="inputBox" type="text" id="interestsBooks"></textarea>
+            </div>
+
+            <div class="field">
+                <h5>Heroes:</h5>
+                <textarea class="inputBox" type="text" id="interestsHeroes"></textarea>
+            </div>
+
+            <h3 style="display: flex;">
+                <u>Code:</u>
+                <a style="text-decoration: none; margin-left: 4px; width: 24px; text-align: center; cursor: help;" href="#" title="By default, sometimes you will not see this option in your Profile edit panel.
+To enable it you will need to edit your profile in the SpaceHey mobile app.
+Once edited once this box should be visible from your profile on Desktop.">?</a>
+            </h3>
+
+            <div class="field">
+                <h5>HTML/CSS Code:</h5>
+                <textarea class="inputBox" type="text" id="customCode"></textarea>
+            </div>
+        </div>
+
+        <div class="preview">
+            <div class="header">
+                <h1 style="font-size: 14px;">Preview:</h1>
+                <label style="font-size: 12px;">
+                    <input type="checkbox" id="liveUpdateCheck" checked>
+                    Live update
+                </label>
+                <button onclick="updatePreview();">Refresh</button>
+            </div>
+            <iframe id="previewFrame"></iframe>
+        </div>
+
+        <button id="toggleEditor" onclick="toggleEditor();">Toggle editor</button>
+        <script src="script.js"></script>
+    </body>
+</html>

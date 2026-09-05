@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+a { color: #FFD0FF; }
+
+#toggleEditor {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 99999999;
+}
+
+.editor {
+    width: 40%;
+    max-width: 480px;
+    padding: 16px;
+    overflow-y: auto;
+    background: #505050;
+    color: #FFFFFF;
+    border-right: 1px solid #A0A0A0;
+}
+
+.editor .field.flex {
+    display: flex;
+    align-items: center;
+}
+
+.editor .field.flex p {
+    min-width: 80px;
+    font-size: 14px;
+    margin: 0 4px;
+    text-align: right;
+}
+
+.editor .field.flex input { flex: 1; }
+
+.editor .field { margin-bottom: 24px; }
+
+.editor .field h5 { margin: 4px; }
+
+.editor .field textarea {
+    resize: vertical;
+    width: 100%;
+    min-height: 100px;
+}
+
+.preview {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview .header {
+    margin: 0;
+    padding: 10px 16px;
+    color: #FFFFFF;
+    background: #404040;
+    border-bottom: 1px solid #A0A0A0;
+}
+
+.preview .header * {
+    display: inline;
+    margin-right: 8px;
+}
+
+#previewFrame {
+    flex: 1;
+    border: none;
+    width: 100%;
+}
+
+#previewFrame.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
