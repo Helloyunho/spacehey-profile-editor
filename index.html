@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
         <title>SpaceHey profile editor</title>
-        <link rel="icon" href="./icon.png">
+        <link rel="icon" href="./image/icon.png">
         <link rel="stylesheet" href="style.css">
 
         <meta name="og:title" content="SpaceHey live profile editor">
         <meta name="og:description" content="A live editor for SpaceHey profiles!">
         <meta name="og:site_name" content="spacehey.skyla.moe">
-        <meta name="og:image" content="https://spacehey.skyla.moe/icon.png">
+        <meta name="og:image" content="https://spacehey.skyla.moe/image/icon.png">
         <meta name="og:locale" content="en_GB">
         <meta name="og:type" content="website">
         
@@ -17,8 +17,15 @@
     </head>
     <body>
         <div class="editor">
-            <img style="width: 80%;" src="./logo.png">
-            <h5 style="margin: 4px 0;">Made by <a href="https://spacehey.com/skyla" target="_blank">Skyla</a>!</h5>
+            <img style="width: 80%;" src="./image/logo.png">
+            <h5 style="margin: 4px 0;">
+                Made by
+                <a href="https://spacehey.com/skyla" target="_blank" title="Skyla on SpaceHey!">Skyla</a>!
+                <i>
+                    ~ View on
+                    <a href="https://github.com/SkylaDev/spacehey-profile-editor" target="_blank" title="Source code on GitHub!">GitHub</a>!
+                </i>
+            </h5>
 
             <hr/>
 
@@ -65,6 +72,22 @@
                 <label>
                     <input type="checkbox" id="isFriendToggle" onclick="updatePreview()" checked>
                     Show &quot;User is your Friend.&quot; box
+                </label>
+
+                <br/>
+
+                <label>
+                    <input type="checkbox" id="userToggle" onclick="updatePreview()" checked>
+                    View as user
+                    <i>&#40;Shows &quot;Add Reply&quot; buttons mostly&#41;</i>
+                </label>
+
+                <br/>
+
+                <label>
+                    <input type="checkbox" id="ownerToggle" onclick="updatePreview()">
+                    Preview as owner
+                    <i>&#40;Shows edit buttons, etc...&#41;</i>
                 </label>
             </div>
 
@@ -124,6 +147,22 @@ Once edited once this box should be visible from your profile on Desktop.">?</a>
                 <h5>HTML/CSS Code:</h5>
                 <textarea class="inputBox" type="text" id="customCode"></textarea>
             </div>
+
+            <hr/>
+
+            <footer style="text-align: center;">
+                <h3>
+                    Made with &#128156; by
+                    <a href="https://skyla.moe/" target="_blank" title="Skyla's website!">Skyla</a>!
+                </h3>
+                <p><a href="/changelog.html" title="SpaceHey live editor changelogs!">Changelog</a></p>
+                <small>
+                    This site is not affiliated with SpaceHey.
+                    <br/>
+                    The edited logo and example profile/assets are the property of
+                    <a href="https://spacehey.com/" target="_blank" title="SpaceHey homepage.">SpaceHey</a>.
+                </small>
+            </footer>
         </div>
 
         <div class="preview">

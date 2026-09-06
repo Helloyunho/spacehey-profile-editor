@@ -2,6 +2,8 @@ const previewFrame = document.getElementById('previewFrame');
 
 const liveUpdateCheck = document.getElementById('liveUpdateCheck');
 const isFriendToggle = document.getElementById('isFriendToggle');
+const ownerToggle = document.getElementById('ownerToggle');
+const userToggle = document.getElementById('userToggle');
 
 const TOKEN_MAP = {
     avatar: "{{USER_AVATAR}}",
@@ -96,8 +98,14 @@ function configSave() {
 function rebuild(values) {
     let preview = templateHtml;
 
+    preview = preview.split('{{CUSTOM_ARGS_HERE}}').join(JSON.stringify({
+        'ownerMode': ownerToggle.checked,
+        'showFriendBox': isFriendToggle.checked,
+        'userMode': userToggle.checked || ownerToggle.checked,
+    }));
+
     // Yup... this how we doing this
-    preview = preview.split('{{USER_IS_FRIEND_BOX}}').join((isFriendToggle.checked) ? '<div class="profile-info"><div class="inner"><h3>{{USERNAME}} is your Friend.</h3></div></div>' : '');
+    // preview = preview.split('{{USER_IS_FRIEND_BOX}}').join((isFriendToggle.checked) ? '<div class="profile-info"><div class="inner"><h3>{{USERNAME}} is your Friend.</h3></div></div>' : '');
 
     for (const [fieldId, token] of Object.entries(TOKEN_MAP)) {
         let raw = values[fieldId] ?? "";
@@ -116,10 +124,9 @@ function updatePreview() {
     
     document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => { values[inputBox.id] = inputBox.value; });
     values['username'] = localStorage.getItem('username') || 'SpaceHey';
-    values['avatar'] = localStorage.getItem('avatar') || './spacehey.png';
+    values['avatar'] = localStorage.getItem('avatar') || './image/spacehey.png';
 
     previewFrame.srcdoc = rebuild(values);
-    previewFrame.contentWindow.showFriendBox = isFriendToggle.checked;
 }
 
 
@@ -203,4 +210,3 @@ fetch('profile.html')
         templateHtml = html;
         updatePreview();
     });
-

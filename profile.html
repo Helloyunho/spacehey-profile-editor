@@ -45,6 +45,9 @@
           <div class="right">
             <a href="#" rel="help">Help</a> | <a href="#">LogIn</a> | <a href="#">SignUp</a>
           </div>
+          <div class="right">
+            <a href="#" rel="help">Help</a> | <a href="#">LogOut</a>
+          </div>
         </div>
         <ul class="links">
           <li class=""><a href="#">Home</a></li>
@@ -72,6 +75,13 @@
             <span itemprop="name">
               <h1>{{USERNAME}}</h1>
             </span>
+            <p class="edit-link">
+              [
+              <a href="#">edit name</a>
+              ] [
+              <a href="#">edit photo</a>
+              ]
+            </p>
             <div class="general-about">
               <div class="profile-pic">
                 <img class="pfp-fallback" src="{{USER_AVATAR}}" alt="SpaceHey's profile picture">
@@ -79,17 +89,29 @@
               <div class="details">
                 <p>{{STATUS_STATUS}}</p>
                 <p>{{STATUS_YOU}}</p>
+                <p class="edit-link">
+                  [
+                  <a href="#">edit</a>
+                  ]
+                </p>
               </div>
             </div>
             <div class="mood">
               <p>
                 <b>Mood:</b>
                 {{STATUS_MOOD}}
+                <span class="edit-link">
+                  [
+                  <a href="#">edit</a>
+                  ]
+                </span>
               </p>
               <p>
                 <b>
                   View my:
                   <a href="#">Blog</a>
+                  |
+                  <a href="#">Bulletins</a>
                   |
                   <a href="#">Forum Topics</a>
                 </b>
@@ -160,7 +182,14 @@
             </div>
             <div class="url-info">
               <p><b>SpaceHey URL:</b></p>
-              <p>https://spacehey.com/spacehey</p>
+              <p>
+                https://spacehey.com/spacehey
+                <span class="edit-link">
+                  [
+                  <a href="#">edit</a>
+                  ]
+                </span>
+              </p>
             </div>
             <div class="table-section">
               <div class="heading">
@@ -208,6 +237,11 @@
                   </tbody>
                 </table>
               </div>
+              <p class="edit-link right-side">
+                [
+                <a href="#">edit</a>
+                ]
+              </p>
             </div>
             <div class="table-section">
               <div class="heading">
@@ -369,10 +403,20 @@
                   </tbody>
                 </table>
               </div>
+              <p class="edit-link right-side">
+                [
+                <a href="#">edit</a>
+                ]
+              </p>
             </div>
           </div>
           <div class="col right">
-            {{USER_IS_FRIEND_BOX}}
+            <div class="profile-info">
+              <div class="inner">
+                <h3>{{USERNAME}} is your Friend.</h3>
+                <h3><a href="#">Edit Your Profile</a></h3>
+              </div>
+            </div>
             <div class="blog-preview">
               <h4>
                 {{USERNAME}}'s Latest Blog Entries
@@ -391,10 +435,20 @@
                 <div class="section">
                   <h4>About me:</h4>
                   <p itemprop="description">{{ABOUT_ME}}</p>
+                  <p class="edit-link">
+                    [
+                    <a href="#">edit</a>
+                    ]
+                  </p>
                 </div>
                 <div class="section">
                   <h4>Who I'd like to meet:</h4>
                   <p>{{WHO_ID_LIKE_TO_MEET}}</p>
+                  <p class="edit-link">
+                    [
+                    <a href="#">edit</a>
+                    ]
+                  </p>
                 </div>
               </div>
             </div>
@@ -415,7 +469,7 @@
                       <p>Emi</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Emi's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Emi's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -423,7 +477,7 @@
                       <p>Trixie</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Trixie's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Trixie's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -431,7 +485,7 @@
                       <p>Yunho</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Yunho's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Yunho's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -439,7 +493,7 @@
                       <p>Sam</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Sam's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Sam's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -447,7 +501,7 @@
                       <p>Soupy</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Soupy's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Soupy's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -455,7 +509,7 @@
                       <p>Saria</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Saria's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Saria's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -463,7 +517,7 @@
                       <p>Aspen</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Aspen's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Aspen's profile picture" loading="lazy">
                     </a>
                   </div>
                   <div class="person">
@@ -471,7 +525,7 @@
                       <p>Figgy</p>
                     </a>
                     <a href="#">
-                      <img class="pfp-fallback" src="./spacehey.png" alt="Figgy 's profile picture" loading="lazy">
+                      <img class="pfp-fallback" src="./image/spacehey.png" alt="Figgy 's profile picture" loading="lazy">
                     </a>
                   </div>
                 </div>
@@ -501,19 +555,24 @@
                           <p>Trixie</p>
                         </a>
                         <a href="#">
-                          <img class="pfp-fallback" src="./spacehey.png" alt="Trixie's profile picture" loading="lazy">
+                          <img class="pfp-fallback" src="./image/spacehey.png" alt="Trixie's profile picture" loading="lazy">
                         </a>
                       </td>
                       <td>
                         <p><b><a class="text-link" href="#"><time class="ago">1788004635</time></a></b></p>
-                        <p>Hello world!</p>
-                        <small>balls :3</small>
+                        <p>
+                          Hello world!
+                          <br/>
+                          <small>balls :3</small>
+                        </p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#"><button>Delete</button></a>
                         <p class="report">
                           <a href="#" rel="nofollow">
                             <img src="https://static.spacehey.net/icons/flag_red.png" class="icon" aria-hidden="true" loading="lazy" alt="">
                             Report Comment
                           </a>
                         </p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentAddReply" href="#"><button>Add Reply</button></a>
                       </td>
                     </tr>
                     <tr>
@@ -522,7 +581,7 @@
                           <p>Saria</p>
                         </a>
                         <a href="#">
-                          <img class="pfp-fallback" src="./spacehey.png" alt="Saria's profile picture" loading="lazy">
+                          <img class="pfp-fallback" src="./image/spacehey.png" alt="Saria's profile picture" loading="lazy">
                         </a>
                       </td>
                       <td>
@@ -533,6 +592,7 @@
                           comment!
                           <b>^-^</b>
                         </p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#"><button>Delete</button></a>
                         <p class="report">
                           <a href="#" rel="nofollow">
                             <img src="https://static.spacehey.net/icons/flag_red.png" class="icon" aria-hidden="true" loading="lazy" alt="">
@@ -548,7 +608,7 @@
                                 by
                                 <a href="#"><b>Soupy</b></a>;
                                 <time class="ago">1787960904</time>;
-                                <a href="#">
+                                <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#">
                                   Delete;
                                 </a>
                                 <a href="#" rel="nofollow">
@@ -558,6 +618,7 @@
                             </p>
                           </div>
                         </div>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentAddReply" href="#"><button>Add Reply</button></a>
                       </td>
                     </tr>
                     <tr>
@@ -566,18 +627,20 @@
                           <p>Yunho</p>
                         </a>
                         <a href="#">
-                          <img class="pfp-fallback" src="./spacehey.png" alt="Yunho's profile picture" loading="lazy">
+                          <img class="pfp-fallback" src="./image/spacehey.png" alt="Yunho's profile picture" loading="lazy">
                         </a>
                       </td>
                       <td>
                         <p><b><a class="text-link" href="#"><time class="ago">1787815383</time></a></b></p>
                         <p>I love pizza!</p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#"><button>Delete</button></a>
                         <p class="report">
                           <a href="#" rel="nofollow">
                             <img src="https://static.spacehey.net/icons/flag_red.png" class="icon" aria-hidden="true" loading="lazy" alt="">
                             Report Comment
                           </a>
                         </p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentAddReply" href="#"><button>Add Reply</button></a>
                       </td>
                     </tr>
                     <tr>
@@ -586,12 +649,13 @@
                           <p>Skyla</p>
                         </a>
                         <a href="#">
-                          <img class="pfp-fallback" src="./spacehey.png" alt="Skyla's profile picture" loading="lazy">
+                          <img class="pfp-fallback" src="./image/spacehey.png" alt="Skyla's profile picture" loading="lazy">
                         </a>
                       </td>
                       <td>
                         <p><b><a class="text-link" href="#"><time class="ago">1787734047</time></a></b></p>
                         <p>wow... so profile... much wow!!!!1!1!!</p>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#"><button>Delete</button></a>
                         <p class="report">
                           <a href="#" rel="nofollow">
                             <img src="https://static.spacehey.net/icons/flag_red.png" class="icon" aria-hidden="true" loading="lazy" alt="">
@@ -607,7 +671,7 @@
                                 by
                                 <a href="#"><b>SpaceHey</b></a>;
                                 <time class="ago">1787960904</time>;
-                                <a href="#">
+                                <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#">
                                   Delete;
                                 </a>
                                 <a href="#" rel="nofollow">
@@ -623,7 +687,7 @@
                                 by
                                 <a href="#"><b>Trixie</b></a>;
                                 <time class="ago">1787961904</time>;
-                                <a href="#">
+                                <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#">
                                   Delete;
                                 </a>
                                 <a href="#" rel="nofollow">
@@ -639,7 +703,7 @@
                                 by
                                 <a href="#"><b>Yunho</b></a>;
                                 <time class="ago">1787962904</time>;
-                                <a href="#">
+                                <a id="THIS_IS_NOT_IN_SPACEHEY_commentDelete" href="#">
                                   Delete;
                                 </a>
                                 <a href="#" rel="nofollow">
@@ -649,6 +713,7 @@
                             </p>
                           </div>
                         </div>
+                        <a id="THIS_IS_NOT_IN_SPACEHEY_commentAddReply" href="#"><button>Add Reply</button></a>
                       </td>
                     </tr>
                   </tbody>
@@ -698,6 +763,27 @@
 
     <!-- THIS IS NOT IN SPACEHEY BTW -->
     <script>
+      let customArgs = {{CUSTOM_ARGS_HERE}};
+
+      // User is your friend/edit profile box
+      if (!(customArgs.ownerMode || customArgs.showFriendBox)) {
+        document.querySelector('.col.right .profile-info').remove();
+      }
+      else { document.querySelector('.col.right .profile-info .inner').children[Number(!customArgs.ownerMode)].remove(); }
+
+      // Comment delete + edit links
+      if (!customArgs.ownerMode) {
+        document.querySelectorAll('.edit-link').forEach(el => el.remove());
+        document.querySelectorAll('#THIS_IS_NOT_IN_SPACEHEY_commentDelete').forEach(el => el.remove());
+      }
+
+      // Login/Logout
+      document.querySelectorAll('nav .top .right')[Number(!customArgs.userMode)].remove();
+
+      // Add reply buttons
+      if (!customArgs.userMode) { document.querySelectorAll('#THIS_IS_NOT_IN_SPACEHEY_commentAddReply').forEach(el => el.remove()); }
+
+      // Kill all links/search bar to prevent stupid stinkyness
       document.querySelectorAll('a[href="#"]').forEach(link => {
         link.addEventListener('click', e => e.preventDefault());
       });
