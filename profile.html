@@ -193,7 +193,7 @@
             </div>
             <div class="table-section">
               <div class="heading">
-                <h4>{{USERNAME}}'s Interests</h4>
+                <h4 id="THIS_IS_NOT_IN_SPACEHEY_interests">{{USERNAME}}'s Interests</h4>
               </div>
               <div class="inner">
                 <table class="details-table" cellspacing="3" cellpadding="3">
@@ -202,37 +202,37 @@
                       <td>
                         <p>General</p>
                       </td>
-                      <td>{{INTEREST_GENERAL}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestGeneral">{{INTEREST_GENERAL}}</td>
                     </tr>
                     <tr>
                       <td>
                         <p>Music</p>
                       </td>
-                      <td>{{INTEREST_MUSIC}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestMusic">{{INTEREST_MUSIC}}</td>
                     </tr>
                     <tr>
                       <td>
                         <p>Movies</p>
                       </td>
-                      <td>{{INTEREST_MOVIES}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestMovies">{{INTEREST_MOVIES}}</td>
                     </tr>
                     <tr>
                       <td>
                         <p>Television</p>
                       </td>
-                      <td>{{INTEREST_TELEVISION}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestTelevision">{{INTEREST_TELEVISION}}</td>
                     </tr>
                     <tr>
                       <td>
                         <p>Books</p>
                       </td>
-                      <td>{{INTEREST_BOOKS}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestBooks">{{INTEREST_BOOKS}}</td>
                     </tr>
                     <tr>
                       <td>
                         <p>Heroes</p>
                       </td>
-                      <td>{{INTEREST_HEROES}}</td>
+                      <td id="THIS_IS_NOT_IN_SPACEHEY_interestHeroes">{{INTEREST_HEROES}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -245,7 +245,7 @@
             </div>
             <div class="table-section">
               <div class="heading">
-                <h4>{{USERNAME}}'s Links</h4>
+                <h4 id="THIS_IS_NOT_IN_SPACEHEY_links">{{USERNAME}}'s Links</h4>
               </div>
               <div class="inner">
                 <table class="details-table" cellspacing="3" cellpadding="3">
@@ -763,7 +763,7 @@
 
     <!-- THIS IS NOT IN SPACEHEY BTW -->
     <script>
-      let customArgs = {{CUSTOM_ARGS_HERE}};
+      const customArgs = window.parent.customArgs;
 
       // User is your friend/edit profile box
       if (!(customArgs.ownerMode || customArgs.showFriendBox)) {
@@ -777,11 +777,11 @@
         document.querySelectorAll('#THIS_IS_NOT_IN_SPACEHEY_commentDelete').forEach(el => el.remove());
       }
 
-      // Login/Logout
-      document.querySelectorAll('nav .top .right')[Number(!customArgs.userMode)].remove();
-
       // Add reply buttons
       if (!customArgs.userMode) { document.querySelectorAll('#THIS_IS_NOT_IN_SPACEHEY_commentAddReply').forEach(el => el.remove()); }
+
+      // Login/Logout
+      document.querySelectorAll('nav .top .right')[Number(!customArgs.userMode)].remove();
 
       // Kill all links/search bar to prevent stupid stinkyness
       document.querySelectorAll('a[href="#"]').forEach(link => {

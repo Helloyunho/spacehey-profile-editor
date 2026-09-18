@@ -5,29 +5,97 @@ const isFriendToggle = document.getElementById('isFriendToggle');
 const ownerToggle = document.getElementById('ownerToggle');
 const userToggle = document.getElementById('userToggle');
 
+window.customArgs = {
+    ownerMode: ownerToggle.checked,
+    showFriendBox: isFriendToggle.checked,
+    userMode: userToggle.checked || ownerToggle.checked,
+}
+
+const DEFAULT_USERNAME = 'SpaceHey'
+const DEFAULT_AVATAR = './image/spacehey.png'
+
+const frameQuerySelector = selector => previewFrame.contentWindow.document.querySelector(selector)
+
 const TOKEN_MAP = {
-    avatar: "{{USER_AVATAR}}",
-    username: "{{USERNAME}}",
+    avatar: src => {
+        frameQuerySelector('.general-about>.profile-pic>.pfp-fallback').src = src
+    },
+    username: username => {
+        frameQuerySelector('span[itemprop="name"]>h1').innerText = username
+        frameQuerySelector('.contact>.heading>h4').innerText = `Contacting ${username}`
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interests').innerText = `${username}'s Interests`
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_links').innerText = `${username}'s Links`
+        const innerH3 = frameQuerySelector('.profile-info>.inner>h3')
+        if (innerH3) {
+            innerH3.innerText = `${username} is your Friend.`
+        }
+        const blogPreviewH4 = frameQuerySelector('.blog-preview>h4')
+        blogPreviewH4.childNodes[0].textContent = `${username}'s Latest Blog Entries [`
+        frameQuerySelector('.blurbs>.heading>h4').innerText = `${username}'s Blurbs`
+        frameQuerySelector('.col.right>.friends:not([id="comments"])>.heading>h4').innerText = `${username}'s Friend Space`
+        const friendInner = frameQuerySelector('.col.right>.friends:not([id="comments"])>.inner>p>b')
+        friendInner.childNodes[0].textContent = `${username} has `
+        frameQuerySelector('.col.right>.friends[id="comments"]>.heading>h4').innerText = `${username}'s Friends Comments`
+    },
 
-    aboutMe: "{{ABOUT_ME}}",
-    whoIdLikeToMeet: "{{WHO_ID_LIKE_TO_MEET}}",
+    aboutMe: aboutMe => {
+        frameQuerySelector('.blurbs>.inner>div:first-child>p[itemprop="description"]').innerHTML = aboutMe
+    },
+    whoIdLikeToMeet: meet => {
+        frameQuerySelector('.blurbs>.inner>div:nth-child(2)>p').innerHTML = meet
+    },
 
-    interestsGeneral: "{{INTEREST_GENERAL}}",
-    interestsMusic: "{{INTEREST_MUSIC}}",
-    interestsMovies: "{{INTEREST_MOVIES}}",
-    interestsTelevision: "{{INTEREST_TELEVISION}}",
-    interestsBooks: "{{INTEREST_BOOKS}}",
-    interestsHeroes: "{{INTEREST_HEROES}}",
+    interestsGeneral: general => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestGeneral').innerHTML = general
+    },
+    interestsMusic: music => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestMusic').innerHTML = music
+    },
+    interestsMovies: movies => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestMovies').innerHTML = movies
+    },
+    interestsTelevision: television => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestTelevision').innerHTML = television
+    },
+    interestsBooks: books => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestBooks').innerHTML = books
+    },
+    interestsHeroes: heroes => {
+        frameQuerySelector('#THIS_IS_NOT_IN_SPACEHEY_interestHeroes').innerHTML = heroes
+    },
 
-    customCode: "{{CUSTOM_CODE}}",
+    customCode: code => {
+        frameQuerySelector('#code').innerHTML = code
+    },
 
-    statusStatus: "{{STATUS_STATUS}}",
-    statusMood: "{{STATUS_MOOD}}",
-    statusYou: "{{STATUS_YOU}}",
+    statusStatus: status => {
+        frameQuerySelector('.general-about>.details>p:first-child').innerText = status ? `"${status}"` : ''
+    },
+    statusMood: mood => {
+        frameQuerySelector('.mood>p').childNodes[2].textContent = ` ${mood}`
+    },
+    statusYou: you => {
+        frameQuerySelector('.general-about>.details>p:nth-child(2)').innerText = you
+    },
 };
 
-let templateHtml = null;
-let updateTimer;
+
+const resetFrame = () => {
+    document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => {
+        TOKEN_MAP[inputBox.id](inputBox.value ?? '')
+    });
+    TOKEN_MAP.avatar(localStorage.getItem('avatar') ?? DEFAULT_AVATAR)
+    TOKEN_MAP.username(localStorage.getItem('username') ?? DEFAULT_USERNAME)
+}
+
+function updateArgs () {
+    window.customArgs = {
+        ownerMode: ownerToggle.checked,
+        showFriendBox: isFriendToggle.checked,
+        userMode: userToggle.checked || ownerToggle.checked,
+    }
+    previewFrame.contentWindow.location.reload()
+}
 
 
 function configLoad(event) {
@@ -50,17 +118,19 @@ function configLoad(event) {
             return;
         }
 
-        document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => {
-            if (Object.prototype.hasOwnProperty.call(values, inputBox.id)) {
-                inputBox.value = values[inputBox.id];
+        Object.entries(TOKEN_MAP).forEach(([key, updater]) => {
+            const inputBox = document.getElementById(key) ?? {value: ''}
+            if (key in values) {
+                inputBox.value = values[key];
+                updater(values[key])
+            } else {
+                inputBox.value = null;
+                updater('')
             }
-            else { inputBox.value = null; }
-        });
+        })
 
-        if (values.username) { localStorage.setItem('username', values.username); }
-        if (values.avatar) { localStorage.setItem('avatar', values.avatar); }
-
-        updatePreview();
+        if (values.username) { localStorage.setItem('username', values.username); TOKEN_MAP.username(values.username) }
+        if (values.avatar) { localStorage.setItem('avatar', values.avatar); TOKEN_MAP.avatar(values.avatar) }
     };
 
     reader.onerror = function() {
@@ -95,44 +165,9 @@ function configSave() {
 }
 
 
-function rebuild(values) {
-    let preview = templateHtml;
-
-    preview = preview.split('{{CUSTOM_ARGS_HERE}}').join(JSON.stringify({
-        'ownerMode': ownerToggle.checked,
-        'showFriendBox': isFriendToggle.checked,
-        'userMode': userToggle.checked || ownerToggle.checked,
-    }));
-
-    // Yup... this how we doing this
-    // preview = preview.split('{{USER_IS_FRIEND_BOX}}').join((isFriendToggle.checked) ? '<div class="profile-info"><div class="inner"><h3>{{USERNAME}} is your Friend.</h3></div></div>' : '');
-
-    for (const [fieldId, token] of Object.entries(TOKEN_MAP)) {
-        let raw = values[fieldId] ?? "";
-
-        if (fieldId == 'statusStatus') { raw = (raw.length > 0) ? `"${raw}"` : raw; }
-
-        preview = preview.split(token).join(raw);
-    }
-
-    return preview;
-}
-
-
-function updatePreview() {
-    const values = {};
-    
-    document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => { values[inputBox.id] = inputBox.value; });
-    values['username'] = localStorage.getItem('username') || 'SpaceHey';
-    values['avatar'] = localStorage.getItem('avatar') || './image/spacehey.png';
-
-    previewFrame.srcdoc = rebuild(values);
-}
-
-
 function resetAvatar() {
     localStorage.removeItem('avatar');
-    updatePreview();
+    TOKEN_MAP.avatar(DEFAULT_AVATAR)
 }
 
 
@@ -164,8 +199,9 @@ function updateAvatar(event) {
             ctx.drawImage(newAvatar, 0, 0, resized.width, resized.height);
 
             try {
-                localStorage.setItem('avatar', resized.toDataURL(file.type));
-                updatePreview();
+                const dataURL = resized.toDataURL(file.type)
+                localStorage.setItem('avatar', dataURL);
+                TOKEN_MAP.avatar(dataURL)
             }
             catch (error) {
                 alert('Failed to update avatar... please try a different image!');
@@ -186,27 +222,25 @@ function updateUsername(name) {
 
     if (username !== null) {
         localStorage.setItem('username', username);
-        updatePreview();
+        TOKEN_MAP.username(username)
     }
 }
 
 
 document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => {
-    inputBox.addEventListener('input', () => {
-        clearTimeout(updateTimer);
-
-        if (liveUpdateCheck.checked) {
-            updateTimer = setTimeout(() => {
-                updatePreview();
-            }, 1000);
-        }
+    inputBox.addEventListener('input', (e) => {
+        TOKEN_MAP[inputBox.id](e.target.value)
     });
 });
+
+
+previewFrame.addEventListener('load', () => {
+    resetFrame()
+})
 
 
 fetch('profile.html')
     .then(resp => resp.text())
     .then(html => {
-        templateHtml = html;
-        updatePreview();
+        previewFrame.srcdoc = html
     });

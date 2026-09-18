@@ -70,14 +70,14 @@
 
             <div class="field">
                 <label>
-                    <input type="checkbox" id="isFriendToggle" onclick="updatePreview()" checked>
+                    <input type="checkbox" id="isFriendToggle" onclick="updateArgs()" checked>
                     Show &quot;User is your Friend.&quot; box
                 </label>
 
                 <br/>
 
                 <label>
-                    <input type="checkbox" id="userToggle" onclick="updatePreview()" checked>
+                    <input type="checkbox" id="userToggle" onclick="updateArgs()" checked>
                     View as user
                     <i>&#40;Shows &quot;Add Reply&quot; buttons mostly&#41;</i>
                 </label>
@@ -85,7 +85,7 @@
                 <br/>
 
                 <label>
-                    <input type="checkbox" id="ownerToggle" onclick="updatePreview()">
+                    <input type="checkbox" id="ownerToggle" onclick="updateArgs()">
                     Preview as owner
                     <i>&#40;Shows edit buttons, etc...&#41;</i>
                 </label>
@@ -168,11 +168,7 @@ Once edited once this box should be visible from your profile on Desktop.">?</a>
         <div class="preview">
             <div class="header">
                 <h1 style="font-size: 14px;">Preview:</h1>
-                <label style="font-size: 12px;">
-                    <input type="checkbox" id="liveUpdateCheck" checked>
-                    Live update
-                </label>
-                <button onclick="updatePreview();">Refresh</button>
+                <button onclick="updateArgs();">Refresh</button>
             </div>
             <iframe id="previewFrame"></iframe>
         </div>
