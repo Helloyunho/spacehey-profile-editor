@@ -229,7 +229,7 @@ function updateUsername(name) {
 
 document.querySelectorAll('.editor .field .inputBox').forEach(inputBox => {
     inputBox.addEventListener('input', (e) => {
-        TOKEN_MAP[inputBox.id](e.target.value)
+        liveUpdateCheck.checked && TOKEN_MAP[inputBox.id](e.target.value)
     });
 });
 
